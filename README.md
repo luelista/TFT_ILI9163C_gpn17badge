@@ -9,6 +9,14 @@ This was nessecary as the esp8266 has no "real" DMA. This slows all drawing call
 
 The library should be compatible with "old code", it uses the same API
 
+If you define a Framebuffer (You can do that in the .cpp file), you have to call the function 
+
+	writeFramebuffer();
+
+to dumb the Framebuffer to the Display.
+
+Warning, only tested on the ESP8266, should work on other platforms, may not the best way there.
+
 ==========================
 
 TFT_ILI9163C
