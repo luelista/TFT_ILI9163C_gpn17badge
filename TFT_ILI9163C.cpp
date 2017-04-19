@@ -63,6 +63,7 @@ void TFT_ILI9163C::begin(void)
 	SPI.begin();
 	SPI.setHwCs(false);
 	ILI9163C_SPI = SPISettings(72000000, MSBFIRST, SPI_MODE0);//
+	SPI.setFrequency(72000000);
 	digitalWrite(_cs, LOW);
 
 	if (_rst != 255) {
