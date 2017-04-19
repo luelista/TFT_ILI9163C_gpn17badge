@@ -284,6 +284,10 @@ void TFT_ILI9163C::writeFramebuffer() {
 	writeScreen16(fbuff,MEMSIZE);
 	writeScreen16(fbuff,MEMSIZE);
 }
+#else
+void TFT_ILI9163C::writeFramebuffer() {	
+	//nop 
+}
 #endif
 
 void TFT_ILI9163C::writeScreen16(uint8_t *bitmap,uint32_t size) {
