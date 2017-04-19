@@ -1,6 +1,9 @@
 This is a fork of the ILI9163C display library by sumotoy. It is based on the adafruit_gfx library and was optimized to run on an esp8266, especially the GPN17-Badge.
+
 This library differs from its original as most of the library drawing functions has been removed and a framebuffer was added.
+
 This was nessecary as the esp8266 has no "real" DMA. This slows all drawing calls down. With a framebuffer, framerates up to 100 fps are possible (without 15-30 fps).
+
 
 The library should be compatible with "old code", it uses the same API
 
