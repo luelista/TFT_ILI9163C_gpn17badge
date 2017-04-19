@@ -7,6 +7,8 @@ This was nessecary as the esp8266 has no "real" DMA. This slows all drawing call
 
 The library should be compatible with "old code", it uses the same API
 
+==========================
+
 TFT_ILI9163C
 
 A fast SPI driver for TFT that use Ilitek ILI9163C driver for Arduino's Teensy's and more...
