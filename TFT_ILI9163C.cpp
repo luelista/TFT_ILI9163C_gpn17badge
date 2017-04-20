@@ -62,8 +62,8 @@ void TFT_ILI9163C::begin(void)
 	pinMode(_cs, OUTPUT);
 	SPI.begin();
 	SPI.setHwCs(false);
-	ILI9163C_SPI = SPISettings(72000000, MSBFIRST, SPI_MODE0);//
-	SPI.setFrequency(72000000);
+	ILI9163C_SPI = SPISettings(32000000, MSBFIRST, SPI_MODE0);//
+	SPI.setFrequency(32000000);
 	digitalWrite(_cs, LOW);
 
 	if (_rst != 255) {
@@ -280,8 +280,7 @@ void TFT_ILI9163C::writeScreen24(const uint32_t *bitmap,uint16_t size) {
 
 #if defined(FRAMEBUFFER)
 void TFT_ILI9163C::writeFramebuffer() {	
-	// somehow i have to call it twice, idk why by now
-	writeScreen16(fbuff,MEMSIZE);
+	homeAddress();	
 	writeScreen16(fbuff,MEMSIZE);
 }
 #else
