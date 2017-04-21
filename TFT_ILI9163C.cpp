@@ -120,7 +120,7 @@ void TFT_ILI9163C::chipInit() {
 	delay(5);
 	
 	writecommand(CMD_GAMMASET);//default gamma curve 3
-	writedata(0x04);//0x04
+	writedata(0x08);//0x04
 	delay(1);
 	
 	writecommand(CMD_GAMRSEL);//Enable Gamma adj    
@@ -132,7 +132,9 @@ void TFT_ILI9163C::chipInit() {
 	writecommand(CMD_DFUNCTR);
 	writedata(0b11111111);//
 	writedata(0b00000110);//
-
+	
+	// meh not that great
+	/*
 	writecommand(CMD_PGAMMAC);//Positive Gamma Correction Setting
 	for (i=0;i<15;i++){
 		writedata(pGammaSet[i]);
@@ -142,7 +144,7 @@ void TFT_ILI9163C::chipInit() {
 	for (i=0;i<15;i++){
 		writedata(nGammaSet[i]);
 	}
-
+	*/
 	writecommand(CMD_FRMCTR1);//Frame Rate Control (In normal mode/Full colors)
 	writedata(0x08);//0x0C//0x08
 	writedata(0x02);//0x14//0x08
@@ -291,7 +293,6 @@ void TFT_ILI9163C::writeFramebuffer() {
 
 void TFT_ILI9163C::writeScreen16(uint8_t *bitmap,uint32_t size) {
 	writecommand(CMD_RAMWR);
-	digitalWrite(_rs,HIGH);
 	digitalWrite(_cs,LOW);
 	SPI.writeBytes(bitmap,size);
 	digitalWrite(_cs,HIGH);
