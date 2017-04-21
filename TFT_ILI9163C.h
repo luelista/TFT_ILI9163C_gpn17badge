@@ -147,7 +147,7 @@ class TFT_ILI9163C : public Adafruit_GFX {
 	void 		pushData(uint16_t color);
 	void 		endPushData();
 	void		writeFramebuffer();
-	void		writeScreen24(const uint32_t *bitmap,uint16_t size=_TFTWIDTH*_TFTHEIGHT);
+	void		writeScreen24(const uint32_t *bitmap,uint16_t size=_TFTWIDTH*_TFTHEIGHT*2);
 	void		writeScreen16(uint8_t *bitmap,uint32_t size=_TFTWIDTH*_TFTHEIGHT*2);
 	inline uint16_t Color565(uint8_t r, uint8_t g, uint8_t b) {return ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3);};
   //convert 24bit color into packet 16 bit one (credits for this are all mine)

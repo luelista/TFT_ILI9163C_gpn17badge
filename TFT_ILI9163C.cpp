@@ -14,7 +14,7 @@
 #define MEMSIZE 128*128*2
 		
 #if defined(FRAMEBUFFER)
-	uint8_t fbuff[MEMSIZE] __attribute__((aligned(32)));
+	uint8_t fbuff[MEMSIZE] __attribute__((aligned()));
 #endif
 
 TFT_ILI9163C::TFT_ILI9163C(uint8_t cspin,uint8_t dcpin,uint8_t rstpin) : Adafruit_GFX(_TFTWIDTH,_TFTHEIGHT)
@@ -120,7 +120,7 @@ void TFT_ILI9163C::chipInit() {
 	delay(5);
 	
 	writecommand(CMD_GAMMASET);//default gamma curve 3
-	writedata(0x08);//0x04
+	writedata(0x04);//0x04
 	delay(1);
 	
 	writecommand(CMD_GAMRSEL);//Enable Gamma adj    
@@ -282,7 +282,7 @@ void TFT_ILI9163C::writeScreen24(const uint32_t *bitmap,uint16_t size) {
 
 #if defined(FRAMEBUFFER)
 void TFT_ILI9163C::writeFramebuffer() {	
-	homeAddress();	
+	homeAddress();
 	writeScreen16(fbuff,MEMSIZE);
 }
 #else
