@@ -293,6 +293,7 @@ void TFT_ILI9163C::writeFramebuffer() {
 
 void TFT_ILI9163C::writeScreen16(uint8_t *bitmap,uint32_t size) {
 	writecommand(CMD_RAMWR);
+	digitalWrite(_rs,HIGH);
 	digitalWrite(_cs,LOW);
 	SPI.writeBytes(bitmap,size);
 	digitalWrite(_cs,HIGH);
