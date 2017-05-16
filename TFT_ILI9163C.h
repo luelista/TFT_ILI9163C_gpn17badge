@@ -124,6 +124,8 @@ This Library has a Framebuffer added, the esp8266 is too slow for normal usage D
 
 #include "_settings/TFT_ILI9163C_registers.h"
 
+#define FRAMEBUFFER
+
 
 class TFT_ILI9163C : public Adafruit_GFX {
 
@@ -147,6 +149,11 @@ class TFT_ILI9163C : public Adafruit_GFX {
 	void 		pushData(uint16_t color);
 	void 		endPushData();
 	void		writeFramebuffer();
+	void		writeRow(uint16_t row, uint16_t row_start, uint16_t row_len, uint8_t * rowdata);
+#ifndef FRAMEBUFFER
+    void        drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color) override;
+    void        fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color) override;
+#endif
 	void		writeScreen24(const uint32_t *bitmap,uint16_t size=_TFTWIDTH*_TFTHEIGHT*2);
 	void		writeScreen16(uint8_t *bitmap,uint32_t size=_TFTWIDTH*_TFTHEIGHT*2);
 	inline uint16_t Color565(uint8_t r, uint8_t g, uint8_t b) {return ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3);};

@@ -5,8 +5,6 @@
 #include <SPI.h>
 
 
-#define FRAMEBUFFER
-
 #if defined(SPI_HAS_TRANSACTION)
 	static SPISettings ILI9163C_SPI;
 #endif
@@ -288,6 +286,36 @@ void TFT_ILI9163C::writeFramebuffer() {
 #else
 void TFT_ILI9163C::writeFramebuffer() {	
 	//nop 
+}
+#endif
+
+void TFT_ILI9163C::writeRow(uint16_t row, uint16_t row_start, uint16_t row_len, uint8_t * data) {	
+#ifndef FRAMEBUFFER 
+	setAddrWindow(row_start, row, row_start + row_len, row+1);
+	writeScreen16(data, row_len * 2);
+#else
+    for (uint16_t i = 0; i < row_len; ++i) {
+        drawPixel(i + row_start, row, data[i * 2] << 8 | data[i * 2 + 1]);
+    }
+#endif
+}
+
+#ifndef FRAMEBUFFER
+void TFT_ILI9163C::drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color) {
+    uint8_t buf[w * 2];
+    for (int16_t i = 0; i < w; ++i) {
+        ((uint16_t*)buf)[i] = color;
+    }
+    writeRow(y, x, w, buf);
+}
+
+void TFT_ILI9163C::fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color) {
+    // Update in subclasses if desired!
+    startWrite();
+    for (int16_t i=y; i<y+h; i++) {
+        writeFastHLine(x, i, w, color);
+    }
+    endWrite();
 }
 #endif
 
