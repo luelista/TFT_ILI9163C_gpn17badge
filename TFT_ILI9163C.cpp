@@ -303,8 +303,9 @@ void TFT_ILI9163C::writeRow(uint16_t row, uint16_t row_start, uint16_t row_len, 
 #ifndef FRAMEBUFFER
 void TFT_ILI9163C::drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color) {
     uint8_t buf[w * 2];
+    uint16_t color_sw = uint8_t(color >> 8) | uint8_t(color) << 8;
     for (int16_t i = 0; i < w; ++i) {
-        ((uint16_t*)buf)[i] = color;
+        ((uint16_t*)buf)[i] = color_sw;
     }
     writeRow(y, x, w, buf);
 }
