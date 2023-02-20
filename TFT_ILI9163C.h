@@ -124,7 +124,7 @@ This Library has a Framebuffer added, the esp8266 is too slow for normal usage D
 
 #include "_settings/TFT_ILI9163C_registers.h"
 
-#define FRAMEBUFFER
+//#define FRAMEBUFFER
 
 
 class TFT_ILI9163C : public Adafruit_GFX {
